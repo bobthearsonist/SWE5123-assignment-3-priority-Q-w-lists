@@ -18,6 +18,20 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Driver.cpp" />
+    <ClCompile Include="..\..\PriorityString.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\d_except.h" />
+    <ClInclude Include="..\..\List1.h" />
+    <ClInclude Include="..\..\Node1.h" />
+    <ClInclude Include="..\..\pqqueue.h" />
+    <ClInclude Include="..\..\PriorityString.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Node1.tem" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{03CE6513-E372-4BDC-AC58-3E12428A1B37}</ProjectGuid>
     <RootNamespace>PriorityQueue</RootNamespace>
@@ -109,8 +123,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
