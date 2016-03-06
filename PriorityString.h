@@ -26,6 +26,10 @@ class PriorityString
 
 		// Postcondition: the priority of PriorityString is changed to n
 		void setPriority( unsigned n);
+		
+		//operator defined for use by iterator
+		bool PriorityString::operator==(PriorityString& comparand);
+
 
 	// Postcondition: The string value of PriorityString has been read in from stream.
 	friend istream& operator>> (istream& stream, PriorityString& ps);
@@ -35,6 +39,7 @@ class PriorityString
 
 
 }; // PriorityString
+
 
 
 #endif

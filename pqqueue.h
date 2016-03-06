@@ -17,6 +17,7 @@ class pqqueue
 		void push(const T& item);
 			// insert item with priority p, derived from the item somehow.
 			// 0 <= p <= MAXPRIORITY
+			// Precondition: item has member method getPriority that return priority of the item as an int
 			// Postcondition: the queue has one more element
 
 		void push(const T& item, int p);
@@ -52,7 +53,7 @@ class pqqueue
 
 
 	// NONMEMBER FUNCTIONS FOR PQQUEUE
-		friend pqqueue& operator+(const pqqueue& pq1, const pqqueue& pq2);
+		//friend pqqueue& operator+(const pqqueue& pq1, const pqqueue& pq2);
 		// put two queues together, keeping priority meaningful
 
 		friend std::ostream& operator<<(std::ostream& out, const pqqueue& pq);
@@ -66,7 +67,15 @@ class pqqueue
 			// you may implement any Linked List you want; just do it correctly.
 
 		int pqsize;
-			// number of elements in the priority queue across all queues
+		// number of elements in the priority queue across all queues
+
+	//PRIVATE helper functions
+		//this function handles the sorted insert, thus keeping seperation of concerns
+		//returns a pointer instead of a reference becaus ethats what node.insert needs
+		//TODO implement a sorted_list class that inherits from list and overrides insert
+		node<T>* push_search_helper(int priority);
+		void check_underflow(void);
+		T& top_helper(void);
 };
 
 
@@ -76,44 +85,96 @@ class pqqueue
 template <typename T>
 pqqueue<T>::pqqueue()
 {
-	// ADD YOUR LOGIC HERE
-	// you need to allocate space for the List
-	// and initialize any values you will use
+	pqsize = 0;
 };
 
 template <typename T>
 pqqueue<T>::~pqqueue()
 {
-	// ADD YOUR LOGIC HERE
-	// you may need to deal with the dynamic nature of this
-	// queue here
+	//the list will be deleted in the destructor
+	//delete priority;
+	pqsize = 0;
 };
 
+//this function relys on a proper copy constructor definition for List
+//the provided class will suffice with a default copy constructor becasue it
+//will copy the head pointer by value
+//both lists will pioint to the same items!
+template <typename T>
+pqqueue<T>::pqqueue(const pqqueue& target)
+{
+	this->pqsize = target.pqsize;
+	this->priority = target.priority;
+}
+
+//this fuction retruns a pointer to the node of insertion for a given item
+template <typename T>
+node<T>* pqqueue<T>::push_search_helper(int target_priority)
+{
+	NodeIterator<T> cursor(priority.get_head());
+	node<T>* prev = *cursor;
+	//NULL test will let this work with empty list too! and protects second test from NULL dereference
+	//>= means we will insert AFTER all current items of the same priority
+	while (cursor != NULL && (*cursor)->data().getPriority() >= target_priority)//TODO implement with iterator and comparator
+	{
+		prev = *(cursor++);
+	}
+	return prev;
+}
+
+//this function assumes that T has a member priority. attempting to use this calss with objects lacking this member
+//will result in a runtime error.
 template <typename T>
 void pqqueue<T>::push(const T& item)
 {
-	// ADD YOUR LOGIC HERE
-	// push item into List where priority is derived somehow
-	// or defaulted and increment priority queue size
+	push(item, item.getPriority());
 };
-
 
 template <typename T>
 void pqqueue<T>::push(const T& item, int p)
 {
-	// ADD YOUR LOGIC HERE
-	// push item into pq using priority p and increment priority queue size
+	//item cannot be null here because a reference must be bound during initialization. It can be invalid, but thats
+	//your problem, not mine.
+
+	//TODO push this into list.push() or a new sorted_list.push inheriting from list. then set get_head to private
+	//we must test for an empty list here becasue the list_insert fucntion does not validate input arguments
+	if (this->size() == 0)
+	{
+		node<T>* head = priority.get_head();
+		list_head_insert(head,item);
+	}
+	else
+	{
+		list_insert(push_search_helper(p), item);
+	}
+	++this->pqsize;
 };
+
+template <typename T>
+void pqqueue<T>::check_underflow(void)
+{
+	//I throw an error for the caller to deal with
+	//Note that I do not test the underlying queue size here since we keep count in the pqqueue
+	if (pqsize <= 0)
+	{
+		throw new underflowError();
+	}
+}
+
+template <typename T>
+T& pqqueue<T>::top_helper(void)
+{
+
+	--pqsize;
+
+	return priority.get_front();
+}
 
 template <typename T>
 void pqqueue<T>::pop()
 {
 	int i = MAXPRIORITY;
-
-	// ADD YOUR LOGIC HERE
-	// if the priority queue is not empty
-	// find a valid value in the list
-	// remove, and decrement priority queue size
+	
 };
 
 template <typename T>
@@ -147,13 +208,9 @@ int pqqueue<T>::size() const
 	return pqsize;
 }
 
-// NONMEMBER FUNCTION IMPLEMENTATIONS
-
-template <typename T>
-pqqueue<T>::pqqueue& operator+(const pqqueue<T>::pqqueue& pq1, const pqqueue<T>::pqqueue& pq2)
-	// put two queues together, keeping priority meaningful
-
-std::ostream& operator<<(std::ostream& out, const pqqueue& pq);
-	// output the queue showing values and priority
-
+template<typename T>
+inline pqqueue<T> & pqqueue<T>::operator=(const pqqueue & pq)
+{
+	// TODO: insert return statement here
+}
 #endif	// LIST_PRIORITY_QUEUE

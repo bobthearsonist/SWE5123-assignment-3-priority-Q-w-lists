@@ -37,7 +37,15 @@ void PriorityString::setPriority( unsigned n)
 	priority=n;
 }
 
+//This function only compares the priority so that it can be used by the
+//list serach methods
+bool PriorityString::operator==(PriorityString& comparand)
+{
+	return this->priority == comparand.priority;
+}
+
 ostream& operator<< (ostream& stream, PriorityString& ps)
 {
 	return stream << setw(5) << ps.getPriority() << " : " << ps.getData() << endl ;
 }
+

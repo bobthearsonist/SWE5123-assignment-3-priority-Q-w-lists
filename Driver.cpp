@@ -1,11 +1,11 @@
 // Example Driver File
 // Author: David Stabler
 
-// #include "pqqueue.h"
 #include "PriorityString.h"
 #include <iostream>
 #include <string>
 #include "Node1.h"
+#include "pqqueue.h"
 
 using namespace std;	// required for string
 
@@ -34,7 +34,6 @@ void main()
 		cursor = cursor->link();
 	}
 
-	/*
 	pqqueue<PriorityString> PQ;
 
 	PQ.push( PriorityString("Test String 1", 1) );
@@ -43,23 +42,22 @@ void main()
 
 	pqqueue<PriorityString> PQ2;
 
-	PQ2.push( PriorityString("Quick", 7);
-	PQ2.push( PriorityString("Fox", 6);
-	PQ2.push( PriorityString("The", 2);
-	PQ2.push( PriorityString("Lazy", 1);
-	PQ2.push( PriorityString("Jumps", 4);
-	PQ2.push( PriorityString("Dog");
-	PQ2.push( PriorityString("Brown", 7);
-	PQ2.push( PriorityString("Over", 4);
-	PQ2.push( PriorityString("The", 9);
-	PQ2.push( PriorityString(".");
+	PQ2.push( PriorityString("Quick", 7));
+	PQ2.push( PriorityString("Fox", 6));
+	PQ2.push( PriorityString("The", 2));
+	PQ2.push( PriorityString("Lazy", 1));
+	PQ2.push( PriorityString("Jumps", 4));
+	PQ2.push( PriorityString("Dog"));
+	PQ2.push( PriorityString("Brown", 7));
+	PQ2.push( PriorityString("Over", 4));
+	PQ2.push( PriorityString("The", 9));
+	PQ2.push( PriorityString("."));
 
-	cout << i << endl;
-	cout << ps << endl;
-	cout << PQ << endl;
-	cout << PQ2 << endl;
+	//cout << i << endl;
+	//cout << ps << endl;
+	//cout << PQ << endl;
+	//cout << PQ2 << endl;
 
-	pqqueue<PriorityString> PQ3 = PQ + PQ2;
-	cout << PQ3 << endl;
-*/	
+	//pqqueue<PriorityString> PQ3 = PQ + PQ2;
+	//cout << PQ3 << endl;
 }

@@ -37,8 +37,12 @@
 #define LIST1_H
 #include <stdlib.h>  // Provides size_t
 #include <assert.h>  // Provides assert
-#include <cstddef.h> // Provides NULL
- 
+#ifdef __cplusplus
+#include <cstddef>  // Provides NULL
+#else
+#inlcude <cstddef.h>
+#endif
+#include "Node1.h"
 template <typename T>
 class List
 {
@@ -47,16 +51,9 @@ class List
     // the node is the place we put our data.  It can be created using
     // the instantiation list method, allowing a quick assignment of
     // passed values
-    struct node
 
-    {
-        T data;
-        node* next;
-        node(T val, node* nptr) : data(val), next(nptr) {}
-    };
-
-    node* head;		// our head pointer
-    size_t size;	// our current size
+    node<T>* head;		// our head pointer
+    size_t count;	// our current size
 
 
 public:
@@ -67,13 +64,17 @@ public:
 
     // INSPECTORS 
 
-    bool is_empty() const { return ( size == 0 ) ; }
-    size_t size() const { return size ; }
+    bool is_empty() const { return ( count == 0 ) ; }
+    size_t size() const { return count ; }
+	//this function was added to allow access to the head as a node pointer to support iterator operations
+	node<T>* get_head(void);
 
     // MODIFIERS
 
     void insert(T);
-    T get_front();
+    T& get_front();
+	void delete_front();
+
 
     // DESTRUCTOR
  
@@ -81,9 +82,9 @@ public:
     {
         while(head)
         {
-            node* temp(head);		// takes the leading object
-            head=head->next;		// repoints to the next
-            delete temp;		// deletes the leading object
+            node<T>* temp(head);	// takes the leading object
+            head=head->link();		// repoints to the next
+            delete temp;			// deletes the leading object
         }
     }
 
@@ -109,9 +110,15 @@ void List<T>::delete_front()
 }
 
 template<typename T>
-T List<T>::get_front()
+T& List<T>::get_front()
 {
     assert( is_empty() );		// check to see that we have values
-    T data( head->data );		// get the data in the front item
-    return data;			// return it
+    return head;			// return it
 }
+
+template<typename T>
+node<T>* List<T>::get_head(void)
+{
+	return head;
+}
+#endif //LIST1_H

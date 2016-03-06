@@ -180,8 +180,52 @@ template< typename T>
     void list_copy(const node<T>* source_ptr, node<T>*& head_ptr, node<T>*& tail_ptr);
 
 #include "Node1.tem"
+template <typename T>
+class NodeIterator
+{
+	/*
+	This class implements an iterator for the provided node class
+	Sources for i's implemntation were "inspired" by the text and
+	the STL. All source was authored.
+	*/
+public:
+	NodeIterator(node<T>* current = NULL)
+	{
+		this->current = current;
+	}
 
+	//postfix ++ operator
+	//increments current to the next item and returns currents prev.
+	//state
+	NodeIterator operator++(int)
+	{
+		NodeIterator old(current);
+		current = current->link();
+		return old;
+	}
+	//prefix iterator
+	//increments current to the next item and returns current
+	NodeIterator& operator++(void)
+	{
+		current = current->link();
+		return current;
+	}
+
+	bool operator!=(const NodeIterator& comparand) const
+	{
+		return this->current != comparand.current;
+	}
+
+	bool operator==(const NodeIterator& comparand) const
+	{
+		return this->current == comparand.current;
+	}
+	
+	node<T>* operator*(void) const
+	{
+		return current;
+	}
+private:
+	node<T>* current;
+};
 #endif
-
-
-
