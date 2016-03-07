@@ -4,7 +4,8 @@
 #include "list1.h"		// or any other LL implementation you desire
 #include "d_except.h"
 
-const int MAXPRIORITY = 10;
+//max priority is now irrelevant and is only limited by the size of an integer.
+//const int MAXPRIORITY = 10;
 
 template <typename T>
 class pqqueue
@@ -130,6 +131,7 @@ void pqqueue<T>::push(const T& item)
 	push(item, item.getPriority());
 };
 
+//this operation is O(1) until the head is of larger priority than the inserted node, then it is O(n)
 template <typename T>
 void pqqueue<T>::push(const T& item, int p)
 {
@@ -138,7 +140,7 @@ void pqqueue<T>::push(const T& item, int p)
 
 	//TODO push this into list.push() or a new sorted_list.push inheriting from list. then set get_head to private
 	//we must test for an empty list here becasue the list_insert fucntion does not validate input arguments
-	if (this->size() == 0)
+	if (priority.get_head() == NULL || (priority.get_head())->data().getPriority() < p)
 	{
 		list_head_insert(this->priority.get_head(),item);
 	}
@@ -163,42 +165,33 @@ void pqqueue<T>::check_underflow(void)
 template <typename T>
 T& pqqueue<T>::top_helper(void)
 {
-
+	check_underflow();
 	--pqsize;
-
 	return priority.get_front();
 }
 
 template <typename T>
 void pqqueue<T>::pop()
 {
-	int i = MAXPRIORITY;
-	
+	return top_helper();
 };
 
 template <typename T>
 T& pqqueue<T>::top()
 {
-	int i = MAXPRIORITY;
-
-	// ADD YOUR LOGIC HERE
-	// same logic as pop, only return item
+	return top_helper();
 };
 
 template <typename T>
 const T& pqqueue<T>::top() const
 {
-	int i = MAXPRIORITY;
-
-	// ADD YOUR LOGIC HERE
-	// same logic as non const top
+	return top_helper();
 };
 
 template <typename T>
 bool pqqueue<T>::empty() const
 {
-	// ADD YOUR LOGIC HERE
-	// determine if priority queue is empty
+	return priority.size() > 0;
 };
 
 template <typename T>
