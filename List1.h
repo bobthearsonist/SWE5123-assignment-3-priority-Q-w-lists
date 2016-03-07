@@ -67,7 +67,8 @@ public:
     bool is_empty() const { return ( count == 0 ) ; }
     size_t size() const { return count ; }
 	//this function was added to allow access to the head as a node pointer to support iterator operations
-	node<T>* get_head(void);
+	node<T>*& get_head(void);
+	const node<T>*& get_head(void) const;
 
     // MODIFIERS
 
@@ -117,7 +118,7 @@ T& List<T>::get_front()
 }
 
 template<typename T>
-node<T>* List<T>::get_head(void)
+node<T>*& List<T>::get_head(void)
 {
 	return head;
 }

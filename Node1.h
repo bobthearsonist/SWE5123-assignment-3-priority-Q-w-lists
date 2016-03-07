@@ -203,6 +203,7 @@ public:
 		current = current->link();
 		return old;
 	}
+	//TODO fix this operator and test it
 	//prefix iterator
 	//increments current to the next item and returns current
 	NodeIterator& operator++(void)

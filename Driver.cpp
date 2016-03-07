@@ -53,10 +53,10 @@ void main()
 	PQ2.push( PriorityString("The", 9));
 	PQ2.push( PriorityString("."));
 
-	//cout << i << endl;
-	//cout << ps << endl;
-	//cout << PQ << endl;
-	//cout << PQ2 << endl;
+	cout << i << endl;
+	cout << ps << endl;
+	cout << PQ << endl;
+	cout << PQ2 << endl;
 
 	//pqqueue<PriorityString> PQ3 = PQ + PQ2;
 	//cout << PQ3 << endl;

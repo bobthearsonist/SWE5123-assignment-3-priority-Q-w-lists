@@ -55,8 +55,8 @@ class pqqueue
 	// NONMEMBER FUNCTIONS FOR PQQUEUE
 		//friend pqqueue& operator+(const pqqueue& pq1, const pqqueue& pq2);
 		// put two queues together, keeping priority meaningful
-
-		friend std::ostream& operator<<(std::ostream& out, const pqqueue& pq);
+		template <typename T>
+		friend ostream& operator<< <T>(ostream& out, const pqqueue<T>& pq);
 		// output the queue showing values and priority
 
 
@@ -140,8 +140,7 @@ void pqqueue<T>::push(const T& item, int p)
 	//we must test for an empty list here becasue the list_insert fucntion does not validate input arguments
 	if (this->size() == 0)
 	{
-		node<T>* head = priority.get_head();
-		list_head_insert(head,item);
+		list_head_insert(this->priority.get_head(),item);
 	}
 	else
 	{
@@ -212,5 +211,18 @@ template<typename T>
 inline pqqueue<T> & pqqueue<T>::operator=(const pqqueue & pq)
 {
 	// TODO: insert return statement here
+}
+
+template <typename T>
+std::ostream& operator<< (std::ostream& out, const pqqueue<T>& pq)
+{
+	// output the queue showing values and priority
+	NodeIterator<T> cursor(const_cast<pqqueue<T>&>(pq).priority.get_head());
+	while (cursor != NULL)
+	{
+		out << (*cursor)->data() << endl;
+		cursor++;
+	}
+	return out;
 }
 #endif	// LIST_PRIORITY_QUEUE
