@@ -226,6 +226,9 @@ public:
 	{
 		return current;
 	}
+
+	//TODO add begin()
+	//TODO add end()
 private:
 	node<T>* current;
 };
