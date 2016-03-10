@@ -107,7 +107,7 @@ pqqueue<T>::pqqueue(const pqqueue<T>& target)
 	{
 		this->push((*cursor)->data());	//copy the values
 		cursor++;						//move to next input
-	}
+}
 }
 
 //this fuction retruns a pointer to the node of insertion for a given item
@@ -221,7 +221,7 @@ inline pqqueue<T>& pqqueue<T>::operator=(const pqqueue & pq)
 	//copy into new list
 	NodeIterator<T> cursor(const_cast<pqqueue<T>&>(pq).priority.get_head());
 	while (cursor != NULL)
-	{
+{
 		this->push((*cursor)->data());	//copy the values
 		cursor++;						//move to next input
 	}
