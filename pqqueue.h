@@ -252,7 +252,7 @@ void copy_helper(const pqqueue<T>& source, pqqueue<T> dest)
 	NodeIterator<T> cursor(const_cast<pqqueue<T>&>(source).priority.get_head());//TODO fix const cast
 	while (cursor != NULL)
 	{
-		pq.push((*cursor)->data().getData());
+		pq.push((*cursor)->data());
 		cursor++;
 	}
 }
