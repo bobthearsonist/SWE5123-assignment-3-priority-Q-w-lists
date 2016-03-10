@@ -58,6 +58,10 @@ void main()
 	cout << PQ << endl;
 	cout << PQ2 << endl;
 
-	//pqqueue<PriorityString> PQ3 = PQ + PQ2;
-	//cout << PQ3 << endl;
+	pqqueue<PriorityString> PQ3 = PQ + PQ2;
+	cout << PQ3 << endl;
+
+	//test self assignment
+	PQ3 = PQ3;
+	cout << PQ3 << endl;
 }
