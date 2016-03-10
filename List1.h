@@ -94,8 +94,9 @@ public:
 template <typename T>
 void List<T>::insert(T data)
 {
-    head = new node(data, head);	// headptr gets a value based on a new node
-    size++;				// incr size, always
+    head = new node<T>(data, head);	// headptr gets a value based on a new node
+    //size is defined as a method not a member so I had to fix this.
+	count++;				// incr size, always
 
 }
 
