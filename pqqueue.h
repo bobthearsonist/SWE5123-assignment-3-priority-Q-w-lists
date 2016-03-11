@@ -21,7 +21,10 @@ class pqqueue
 			// Precondition: item has member method getPriority that returns priority of the item as an int
 			// Postcondition: the queue has one more element
 
-		void push(const T& item, int p);
+		//this push declaration modified to not take a const this in order to set the priority of item to p before the push
+		//this accomodates my understanding of the "push with priority p" requirement of the original description. Since the list
+		//does not understand anything but the priority of the item, the item must be set with priority p.
+		void push(T& item, int p);
 			// insert item with priority p
 			// priority is limited only by the size of int for the machine
 			// Postcondition: the queue has one more element
@@ -31,14 +34,18 @@ class pqqueue
 			// Precondition: the queue is not empty. the function
 			// can throw the underflowError exception if the queue is empty
 			// void pop() throw ( underflowError )
-
-		T& top();
+		
+		// my accesors here were changed to return copies. The underlying node class has absolute data encapsulation, meaning that the class
+		// manages memory internally, and I cant get it. This strategy makes sens, we dont want to rely on the user to manage the memory, and
+		// we cant trust them to not delete it either, so it copies on on the push and returns a copy on the pop.
+		// (note we could have changed the underlying class to use refrences, or worse declared heap space, but I think this was the "best" way)
+		T top();
 			// item with the largest priority is returned
 			// Precondition: the queue is not empty. the function
 			// can throw the underflowError exception if the queue is empty
 			// T& top() throw ( underflowError )
 
-		const T& top() const;
+		const T top() const;
 			// constant version of top()
 
 		bool empty() const;
@@ -72,12 +79,15 @@ class pqqueue
 		// number of elements in the priority queue across all queues
 
 	//PRIVATE helper functions
-		//this function handles the sorted insert, thus keeping seperation of concerns
+		
+		//handles the sorted insert, thus keeping seperation of concerns
 		//returns a pointer instead of a reference becaus ethats what node.insert needs
 		//TODO implement a sorted_list class that inherits from list and overrides insert
 		node<T>* push_search_helper(int priority);
+		//prevents duplicate code when dealing with checking for undeflows
 		void check_underflow(void);
-		T& top_helper(void);
+		//prevents duplicate conde when dealing with top
+		T top_helper(void);
 };
 
 
@@ -130,13 +140,6 @@ node<T>* pqqueue<T>::push_search_helper(int target_priority)
 template <typename T>
 void pqqueue<T>::push(const T& item)
 {
-	push(item, item.getPriority());
-};
-
-//this operation is O(1) until the head is of larger priority than the inserted node, then it is O(n)
-template <typename T>
-void pqqueue<T>::push(const T& item, int p)
-{
 	//item cannot be null here because a reference must be bound during initialization. It can be invalid, but thats
 	//your problem, not mine.
 
@@ -144,15 +147,33 @@ void pqqueue<T>::push(const T& item, int p)
 
 	//TODO push this into list.push() or a new sorted_list.push inheriting from list. then set get_head to private
 	//we must test for an empty list here becasue the list_insert fucntion does not validate input arguments
-	if (priority.get_head() == NULL || (priority.get_head())->data().getPriority() < p)
+	if (priority.get_head() == NULL || (priority.get_head())->data().getPriority() < item.getPriority())
 	{
-		list_head_insert(this->priority.get_head(),item);
+		list_head_insert(this->priority.get_head(), item);
 	}
 	else
 	{
-		list_insert(push_search_helper(p), item);
+		list_insert(push_search_helper(item.getPriority()), item);
 	}
 	++this->pqsize;
+};
+
+//this operation is O(1) until the head is of larger priority than the inserted node, then it is O(n)
+template <typename T>
+void pqqueue<T>::push(T& item, int p)
+{
+	//item cannot be null here because a reference must be bound during initialization. It can be invalid, but thats
+	//your problem, not mine.
+
+	//negative values are not rejected here as they can be sorted and therfore are valid priorities.
+
+	//override the item priority with the priority given if they are not equal
+	if (item.getPriority() != p)
+	{
+		item.setPriority(p);
+	}
+
+	push(item);
 };
 
 template <typename T>
@@ -166,9 +187,11 @@ void pqqueue<T>::check_underflow(void)
 	}
 }
 
+//check for underflow and then return a copy of the top item
 template <typename T>
-T& pqqueue<T>::top_helper(void)
+T pqqueue<T>::top_helper(void)
 {
+	check_underflow();
 	return priority.get_front();
 }
 
@@ -181,13 +204,13 @@ void pqqueue<T>::pop()
 };
 
 template <typename T>
-T& pqqueue<T>::top()
+T pqqueue<T>::top()
 {
 	return top_helper();
 };
 
 template <typename T>
-const T& pqqueue<T>::top() const
+const T pqqueue<T>::top() const
 {
 	return top_helper();
 };

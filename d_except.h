@@ -3,10 +3,11 @@
 
 #include <strstream>
 #include <string>
+#include <exception>
 
 using namespace std;
 
-class baseException
+class baseException : public exception // I added inheritance here for the base exception to help catching
 {
 	public:
 		baseException(const string& str = ""):
@@ -16,9 +17,9 @@ class baseException
 				msgString = "Unspecified exception";
 		}
 
-		string what() const
+		virtual const char * what() const throw()//this definition was updated to properly extend the std exception class
 		{
-			return msgString;
+			return msgString.c_str();//conversion to a c_str needed for the standard return value
 		}
 
 	// protected allows a derived class to access msgString.

@@ -64,4 +64,25 @@ void main()
 	//test self assignment
 	PQ3 = PQ3;
 	cout << PQ3 << endl;
+
+	//try some negative priorities and make sure they are sorted accordingly
+	//they should appeasr in the list as 1,4,2,3
+	PQ3.push(PriorityString("negative 1"), -3);
+	PQ3.push(PriorityString("negative 2"), -5);
+	PQ3.push(PriorityString("negative 3"), -5);
+	PQ3.push(PriorityString("negative 4"), -4);
+	cout << PQ3 << endl;
+	//try our underflow exception
+	try
+	{
+		while (1)
+		{
+			cout << PQ3.top();
+			PQ3.pop();
+		}
+	}
+	catch(exception e)
+	{
+		cout << e.what()<< endl;
+	}
 }

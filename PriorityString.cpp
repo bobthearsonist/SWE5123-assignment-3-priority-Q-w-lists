@@ -16,7 +16,7 @@ PriorityString::PriorityString( const string&s )
 	priority=0;
 }
 
-PriorityString::PriorityString( const string&s, unsigned n )
+PriorityString::PriorityString( const string&s, signed int n )//I changed this to explicitely accept negative priorities
 {
 	payload=s;
 	priority=n;
@@ -32,7 +32,7 @@ string PriorityString::getData() const
 	return payload;
 }
 
-void PriorityString::setPriority( unsigned n)
+void PriorityString::setPriority(int n)
 {
 	priority=n;
 }

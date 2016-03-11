@@ -73,7 +73,7 @@ public:
     // MODIFIERS
 
     void insert(T);
-    T& get_front();
+    T get_front();//updated to return a copy the underlying node class has absolute data hiding
 	void delete_front();
 
 
@@ -103,19 +103,19 @@ void List<T>::insert(T data)
 template<typename T>
 void List<T>::delete_front()
 {
-    assert( is_empty() );		// check to see that we have values
+    assert( is_empty() );	// check to see that we have values
 
-    node* temp(head);			// save the front
-    head = head->next ;			// skip headptr over to #2
+    node<T>* temp(head);	// save the front this did not have a type parameter
+    head = head->link() ;	// skip headptr over to #2 this was using the wrong member name
     delete temp;			// delete the front item
 
 }
 
 template<typename T>
-T& List<T>::get_front()
+T List<T>::get_front()
 {
     assert( is_empty() );		// check to see that we have values
-    return head;			// return it
+    return head->data();		// return it this was not returning the right type, needed to access the node data
 }
 
 template<typename T>

@@ -139,7 +139,7 @@ template< typename T>
 
 	// Member functions to set the data and link fields:
     	void set_data(const T& new_data) { data_field = new_data; }
-    	void set_link(node<T>* new_link)          { link_field = new_link; }
+    	void set_link(node<T>* new_link) { link_field = new_link; }
 
 	// Constant member function to retrieve the current data:
 	T data( ) const { return data_field; }

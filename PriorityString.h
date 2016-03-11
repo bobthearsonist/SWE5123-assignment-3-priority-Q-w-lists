@@ -11,12 +11,12 @@ class PriorityString
 
 	protected:
 		string	payload;	// our data element to enqueue
-		int	priority;	// our priority value
+		int	priority;		// our priority value
 	
 	public:
 		PriorityString();
 		PriorityString( const string& s);
-		PriorityString( const string& s, unsigned n);
+		PriorityString( const string& s, int n);//explicitely allow negative priorities
 
 		// Postcondition: the integer returned is the priority of this element
 		int getPriority() const;
@@ -25,7 +25,7 @@ class PriorityString
 		string getData() const;
 
 		// Postcondition: the priority of PriorityString is changed to n
-		void setPriority( unsigned n);
+		void setPriority( int n);//explicitely allow negative priorities
 		
 		//operator defined for use by iterator
 		bool PriorityString::operator==(PriorityString& comparand);

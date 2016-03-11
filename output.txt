@@ -1,0 +1,144 @@
+3
+    3 : String with Priority 3
+
+    5 : String with Priority 5
+
+    4 : String with Priority 4
+
+hi there
+    5 : String with Priority 5
+
+    5 : String with Priority 5
+
+    2 : Test String 2
+
+    1 : Test String 1
+
+
+    9 : The
+
+    7 : Quick
+
+    7 : Brown
+
+    6 : Fox
+
+    4 : Jumps
+
+    4 : Over
+
+    2 : The
+
+    1 : Lazy
+
+    0 : Dog
+
+    0 : .
+
+
+    9 : The
+
+    7 : Quick
+
+    7 : Brown
+
+    6 : Fox
+
+    5 : String with Priority 5
+
+    4 : Jumps
+
+    4 : Over
+
+    2 : The
+
+    2 : Test String 2
+
+    1 : Lazy
+
+    1 : Test String 1
+
+    0 : Dog
+
+    0 : .
+
+
+    9 : The
+
+    7 : Quick
+
+    7 : Brown
+
+    6 : Fox
+
+    5 : String with Priority 5
+
+    4 : Jumps
+
+    4 : Over
+
+    2 : The
+
+    2 : Test String 2
+
+    1 : Lazy
+
+    1 : Test String 1
+
+    0 : Dog
+
+    0 : .
+
+
+    9 : The
+
+    7 : Quick
+
+    7 : Brown
+
+    6 : Fox
+
+    5 : String with Priority 5
+
+    4 : Jumps
+
+    4 : Over
+
+    2 : The
+
+    2 : Test String 2
+
+    1 : Lazy
+
+    1 : Test String 1
+
+    0 : Dog
+
+    0 : .
+
+   -3 : negative 1
+
+   -4 : negative 4
+
+   -5 : negative 2
+
+   -5 : negative 3
+
+
+    9 : The
+    7 : Quick
+    7 : Brown
+    6 : Fox
+    5 : String with Priority 5
+    4 : Jumps
+    4 : Over
+    2 : The
+    2 : Test String 2
+    1 : Lazy
+    1 : Test String 1
+    0 : Dog
+    0 : .
+   -3 : negative 1
+   -4 : negative 4
+   -5 : negative 2
+   -5 : negative 3
