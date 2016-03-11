@@ -64,7 +64,6 @@ class pqqueue
 		friend pqqueue<T> operator+ <T>(const pqqueue<T>& pq1, const pqqueue<T>& pq2);
 		// put two queues together, keeping priority meaningful
 		// post-condition: The items of B are added to the queue of A. A is "first in line" as a result A+B!=B+A.
-		template <typename T>
 		friend ostream& operator<< <T>(ostream& out, const pqqueue<T>& pq);
 		// output the queue showing values and priority
 
