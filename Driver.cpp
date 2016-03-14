@@ -4,7 +4,7 @@
 #include "PriorityString.h"
 #include <iostream>
 #include <string>
-#include "Node1.h"
+#include "Node.h"
 #include "pqqueue.h"
 
 using namespace std;	// required for string
@@ -12,27 +12,9 @@ using namespace std;	// required for string
 void main()
 {
 
+
 	string i="hi there";
  	PriorityString ps("String with Priority 5", 5);
-
-    node<PriorityString>* headptr;
-
-	headptr=new node<PriorityString>(ps);
-
- 	PriorityString ps2("String with Priority 4", 4);
-
-	list_insert(headptr, ps2);
-
-	list_head_insert(headptr, PriorityString("String with Priority 3", 3) );
-
-	cout << list_length( headptr ) << endl ;
-
-	node<PriorityString>* cursor = headptr;
-	while ( cursor != NULL )
-	{
-		cout <<  cursor->data() << endl;
-		cursor = cursor->link();
-	}
 
 	pqqueue<PriorityString> PQ;
 
