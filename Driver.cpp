@@ -4,7 +4,6 @@
 #include "PriorityString.h"
 #include <iostream>
 #include <string>
-#include "Node.h"
 #include "pqqueue.h"
 
 using namespace std;	// required for string
@@ -48,12 +47,39 @@ void main()
 	cout << PQ3 << endl;
 
 	//try some negative priorities and make sure they are sorted accordingly
-	//they should appeasr in the list as 1,4,2,3
+	//they should appear in the list as 1,4,2,3
 	PQ3.push(PriorityString("negative 1"), -3);
 	PQ3.push(PriorityString("negative 2"), -5);
 	PQ3.push(PriorityString("negative 3"), -5);
 	PQ3.push(PriorityString("negative 4"), -4);
 	cout << PQ3 << endl;
+
+
+	//Iw as having troubles with the order and my suspicion was that it was on the insert of the underlying list
+	//not my iterator/comparison for the priority
+	pqqueue<PriorityString> PQ4;
+	PQ4.push(PriorityString("1", 1));
+	PQ4.push(PriorityString("2", 2));
+	PQ4.push(PriorityString("3", 3));
+	PQ4.push(PriorityString("4", 4));
+	PQ4.push(PriorityString("5", 5));
+	PQ4.push(PriorityString("6", 6));
+	PQ4.push(PriorityString("7", 7));
+
+	cout << PQ4 << endl;
+	//see if it is at the first repeat priority
+	PQ4.push(PriorityString("4 2", 4));
+	
+	cout << PQ4 << endl;
+	//see if it is on the second repeated priority insert
+	PQ4.push(PriorityString("6 2", 6));
+
+	cout << PQ4 << endl;
+	//see if its on repeats at the head
+	PQ4.push(PriorityString("7 2", 7));
+	
+	cout << PQ4 << endl;
+
 	//try our underflow exception
 	try
 	{

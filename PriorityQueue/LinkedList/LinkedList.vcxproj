@@ -144,12 +144,10 @@
   <ItemGroup>
     <ClInclude Include="..\..\LinkedList\basic_node.h" />
     <ClInclude Include="..\..\LinkedList\List.h" />
-    <ClInclude Include="..\..\LinkedList\Node.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\LinkedList\basic_node_iterator.tpp" />
     <None Include="..\..\LinkedList\List.tpp" />
-    <None Include="..\..\LinkedList\NodeIterator.tpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\LinkedList\LinkedListTest.cpp" />

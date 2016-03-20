@@ -21,18 +21,12 @@
     <ClInclude Include="..\..\LinkedList\List.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\LinkedList\Node.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\LinkedList\basic_node_iterator.tpp">
       <Filter>Header Files</Filter>
     </None>
     <None Include="..\..\LinkedList\List.tpp">
-      <Filter>Header Files</Filter>
-    </None>
-    <None Include="..\..\LinkedList\NodeIterator.tpp">
       <Filter>Header Files</Filter>
     </None>
   </ItemGroup>
