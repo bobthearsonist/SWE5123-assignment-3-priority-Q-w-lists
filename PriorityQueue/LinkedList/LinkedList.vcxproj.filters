@@ -23,9 +23,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\LinkedList\basic_node_iterator.tpp">
-      <Filter>Header Files</Filter>
-    </None>
     <None Include="..\..\LinkedList\List.tpp">
       <Filter>Header Files</Filter>
     </None>

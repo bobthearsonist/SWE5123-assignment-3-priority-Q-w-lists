@@ -20,7 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Driver.cpp" />
-    <ClCompile Include="..\..\pqqueue.cpp" />
     <ClCompile Include="..\..\PriorityString.cpp" />
   </ItemGroup>
   <ItemGroup>

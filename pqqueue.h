@@ -20,16 +20,16 @@ class pqqueue
 		~pqqueue();			// destructor
 		pqqueue(const pqqueue& pq);	// copy constructor
 
-		void push(/*TODO const*/T& item);
+		void push(const T& item);
 			// insert item with priority p, derived from the item somehow.
 			// priority is limited only by the size of int for the machine
 			// Precondition: item has member method getPriority that returns priority of the item as an int
 			// Postcondition: the queue has one more element
 
-		//this push declaration modified to not take a const this in order to set the priority of item to p before the push
+		//this push declaration modified to not take a const item in order to set the priority of item to p before the push
 		//this accomodates my understanding of the "push with priority p" requirement of the original description. Since the list
 		//does not understand anything but the priority of the item, the item must be set with priority p.
-		void push(/*TODO const*/T& item, int p);
+		void push(T& item, int p);
 			// insert item with priority p
 			// priority is limited only by the size of int for the machine
 			// Postcondition: the queue has one more element
@@ -124,7 +124,7 @@ pqqueue<T>::pqqueue(const pqqueue<T>& target)
 //my insert has an insert of O(N), on top of the O(N) of setting the input iterator here to sort
 //making push an O(N^2) operation.
 template <typename T>
-void pqqueue<T>::push(/*TODO const*/T& item)
+void pqqueue<T>::push(const T& item)
 {
 	//item cannot be null here because a reference must be bound during initialization. It can be invalid, but thats
 	//your problem, not mine.
@@ -143,7 +143,7 @@ void pqqueue<T>::push(/*TODO const*/T& item)
 
 //this operation is O(1) until the head is of larger priority than the inserted node, then it is O(n)
 template <typename T>
-void pqqueue<T>::push(/*TODO const*/T& item, int p)
+void pqqueue<T>::push(T& item, int p)
 {
 	//item cannot be null here because a reference must be bound during initialization. It can be invalid, but thats
 	//your problem, not mine.
@@ -211,10 +211,10 @@ pqqueue<T>& pqqueue<T>::operator=(const pqqueue & pq)
 	this->priority.clear();
 	
 	//copy into new list
-	//TODO implement const iterator
-	for (typename List<T>::iterator cursor = const_cast<pqqueue<T>&>(pq).priority.begin(); cursor != const_cast<pqqueue<T>&>(pq).priority.end(); ++cursor)
+	for (typename List<T>::iterator cursor = pq.priority.begin(); cursor != pq.priority.end(); ++cursor)
 	{
-		this->push(*cursor);	//copy the values
+		const T item = *cursor;
+		this->push(item);	//copy the values
 	}
 
 	return *this;
@@ -224,8 +224,7 @@ template <typename T>
 std::ostream& operator<< (std::ostream& out, const pqqueue<T>& pq)
 {
 	// output the queue showing values and priority
-	//TODO implement const iterator
-	for (typename List<T>::iterator cursor = const_cast<pqqueue<T>&>(pq).priority.begin(); cursor != const_cast<pqqueue<T>&>(pq).priority.end(); ++cursor)
+	for (typename List<T>::iterator cursor = pq.priority.begin(); cursor != pq.priority.end(); ++cursor)
 	{
 		out << *cursor << endl;
 	}
@@ -253,8 +252,7 @@ pqqueue<T> operator+(const pqqueue<T>& pq1, const pqqueue<T>& pq2)
 		pq = pq2;
 	}
 
-	//TODO implement const iterator
-	for (typename List<T>::iterator cursor = const_cast<pqqueue<T>*>(smaller)->priority.begin(); cursor != const_cast<pqqueue<T>*>(smaller)->priority.end(); ++cursor)
+	for (typename List<T>::iterator cursor = smaller->priority.begin(); cursor != smaller->priority.end(); ++cursor)
 	{
 		pq.push(*cursor);
 	}

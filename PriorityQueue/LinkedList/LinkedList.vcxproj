@@ -146,7 +146,6 @@
     <ClInclude Include="..\..\LinkedList\List.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\LinkedList\basic_node_iterator.tpp" />
     <None Include="..\..\LinkedList\List.tpp" />
   </ItemGroup>
   <ItemGroup>
